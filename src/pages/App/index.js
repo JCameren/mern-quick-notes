@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { getUser } from "../../utilities/users-service";
-import NewOrderPage from "../NewOrder/index";
+import NewNotePage from "../NewNote/index";
 import AuthPage from "../Auth/index";
-import OrderHistoryPage from "../OrderHistory/index";
+import NotesPage from "../NotesPage/index";
 import Navbar from "../../components/Navbar";
 import "./index.css";
 
@@ -11,12 +11,12 @@ const App = () => {
   const [user, setUser] = useState(getUser());
 
   const logOutUser = (user) => {
-    setUser(user)
-  }
+    setUser(user);
+  };
 
   const signInUser = (userData) => {
-    setUser(userData)
-  }
+    setUser(userData);
+  };
   return (
     <main className="App">
       {user ? (
@@ -24,12 +24,12 @@ const App = () => {
           <Navbar user={user} setUser={logOutUser} />
           <Routes>
             {/* Route components in here */}
-            <Route path="/orders" element={<OrderHistoryPage />} />
-            <Route path="/orders/new" element={<NewOrderPage />} />
+            <Route path="/notes" element={<NotesPage user={user} />} />
+            {/* <Route path="/notes/new" element={<NewNotePage user={user} />} /> */}
           </Routes>
         </>
       ) : (
-        <AuthPage setUser={signInUser}/>
+        <AuthPage setUser={signInUser} />
       )}
     </main>
   );
